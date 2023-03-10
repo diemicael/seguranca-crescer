@@ -40,11 +40,31 @@ export const useAuth = () => {
     return response.data;
   }
 
+  async function forgotPassword(email) {
+    const response = await axiosInstance.post(
+      "/usuarios/forgot-password/publico",
+      email
+    );
+
+    return response.data;
+  }
+
+  async function changePassword(senha, token) {
+    const response = await axiosInstance.post(
+      `/usuarios/change-password/${token}/publico`,
+      senha
+    );
+
+    return response.data;
+  }
+
   return {
     login,
     registrar,
     logout,
     getMe,
     editarPerfil,
+    forgotPassword,
+    changePassword,
   };
 };

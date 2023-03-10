@@ -18,6 +18,15 @@
   text-align: center;
 }
 
+.forgot-password {
+  color: #2ea44f;
+  margin: 10px 0px;
+}
+
+.forgot-password:hover {
+  color: #2c974b;
+}
+
 .container {
   background-color: #fff;
   border-radius: 10px;

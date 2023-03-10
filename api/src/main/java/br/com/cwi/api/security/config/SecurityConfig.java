@@ -31,6 +31,7 @@ public class SecurityConfig {
                         .antMatchers("/*/**/publico").permitAll()
                         .antMatchers(POST, "/usuarios").permitAll()
 
+
                 .and()
                     .authorizeRequests()
                         .anyRequest().authenticated()

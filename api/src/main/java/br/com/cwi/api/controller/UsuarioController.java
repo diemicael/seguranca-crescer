@@ -1,12 +1,15 @@
 package br.com.cwi.api.controller;
 
 import br.com.cwi.api.controller.request.EditarUsuarioRequest;
+import br.com.cwi.api.controller.request.EnviarEmailRequest;
 import br.com.cwi.api.controller.request.IncluirUsuarioRequest;
+import br.com.cwi.api.controller.request.PasswordUpdateWithTokenRequest;
 import br.com.cwi.api.controller.response.EditarUsuarioResponse;
 import br.com.cwi.api.controller.response.UsuarioResponse;
 import br.com.cwi.api.service.BuscarUsuarioService;
 import br.com.cwi.api.service.EditarUsuarioService;
 import br.com.cwi.api.service.IncluirUsuarioService;
+import br.com.cwi.api.service.UsuarioPasswordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +31,9 @@ public class UsuarioController {
     @Autowired
     private BuscarUsuarioService buscarUsuarioService;
 
+    @Autowired
+    private UsuarioPasswordService usuarioPasswordService;
+
     @GetMapping("/me")
     @ResponseStatus(OK)
     public UsuarioResponse buscar() {
@@ -45,4 +51,15 @@ public class UsuarioController {
     public EditarUsuarioResponse editar(@Valid @RequestBody EditarUsuarioRequest request) {
         return editarUsuarioService.editar(request);
     }
+
+    @PostMapping("/forgot-password/publico")
+    public void forgotPassword(@RequestBody @Valid EnviarEmailRequest request) {
+        usuarioPasswordService.enviarToken(request);
+    }
+
+    @PostMapping("/change-password/{token}/publico")
+    public void changePassword(@Valid @RequestBody PasswordUpdateWithTokenRequest request, @PathVariable String token) {
+        usuarioPasswordService.alterarSenha(request.getPassword(), token);
+    }
+
 }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useGlobalUser } from "../../../contexts/user.context";
 import { useAuth } from "../../../hooks/";
@@ -134,6 +134,9 @@ export const LoginScreen = () => {
               onChange={handleChangeLogin}
               value={userInfo.password}
             />
+            <Link to="/forgot-password" className="forgot-password">
+              Esqueci minha senha
+            </Link>
             <Button>Entrar</Button>
           </form>
         </div>
