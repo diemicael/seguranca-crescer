@@ -3,6 +3,6 @@ import { API_URL } from "../../../core/constants";
 
 export const axiosInstance = axios.create({
   baseURL: API_URL,
-  timeout: 5000,
+  timeout: 2000,
   withCredentials: true,
 });
